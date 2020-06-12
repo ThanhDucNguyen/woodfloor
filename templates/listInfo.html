@@ -1,0 +1,256 @@
+<!doctype html>
+<html class="no-js" lang="" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Wit Bus | Manager Bus Owner</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- favicon
+		============================================ -->
+    <link rel="shortcut icon" type="image/x-icon" href="owner/img/favicon.ico">
+    <!-- Google Fonts
+		============================================ -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
+    <!-- Bootstrap CSS
+		============================================ -->
+    <link rel="stylesheet" href="owner/css/bootstrap.min.css">
+    <!-- font awesome CSS
+		============================================ -->
+    <link rel="stylesheet" href="owner/css/font-awesome.min.css">
+    <!-- owl.carousel CSS
+		============================================ -->
+    <link rel="stylesheet" href="owner/css/owl.carousel.css">
+    <link rel="stylesheet" href="owner/css/owl.theme.css">
+    <link rel="stylesheet" href="owner/css/owl.transitions.css">
+    <!-- meanmenu CSS
+		============================================ -->
+    <link rel="stylesheet" href="owner/css/meanmenu/meanmenu.min.css">
+    <!-- animate CSS
+		============================================ -->
+    <link rel="stylesheet" href="owner/css/animate.css">
+    <!-- normalize CSS
+		============================================ -->
+    <link rel="stylesheet" href="owner/css/normalize.css">
+	<!-- wave CSS
+		============================================ -->
+    <link rel="stylesheet" href="owner/css/wave/waves.min.css">
+    <link rel="stylesheet" href="owner/css/wave/button.css">
+    <!-- mCustomScrollbar CSS
+		============================================ -->
+    <link rel="stylesheet" href="owner/css/scrollbar/jquery.mCustomScrollbar.min.css">
+    <!-- Notika icon CSS
+		============================================ -->
+    <link rel="stylesheet" href="owner/css/notika-custom-icon.css">
+    <!-- Data Table JS
+		============================================ -->
+    <link rel="stylesheet" href="owner/css/jquery.dataTables.min.css">
+    <!-- main CSS
+		============================================ -->
+    <link rel="stylesheet" href="owner/css/main.css">
+    <!-- style CSS
+		============================================ -->
+    <link rel="stylesheet" href="owner/css/style.css">
+    <!-- responsive CSS
+		============================================ -->
+    <link rel="stylesheet" href="owner/css/responsive.css">
+    <!-- modernizr JS
+		============================================ -->
+    <script src="owner/js/vendor/modernizr-2.8.3.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+</head>
+
+<body>
+    <div class="header-top-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="logo-area">
+                        <div  style="width: 100%">
+                                <h2 style="width: 50%; float: left; color: white; font-weight: bold;">Nguyễn Thành Đạt</h2>
+                            <div style="color: white"><span><a style="float: right;color: white"> Logout</a></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Main Menu area End-->
+    <!-- Start Status area -->
+    <div class="notika-status-area">
+        <div class="container">
+            <div class="row">
+                <p style="text-align: center;text-transform: uppercase;font-size: 20px;color: #ccc; margin: 20px 0">
+                Danh sách sản phẩm của bạn</p>
+            </div>
+        </div>
+    </div>
+    <div class="breadcomb-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="breadcomb-list">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="breadcomb-wp">
+                                    <div class="breadcomb-icon">
+                                        <i class="notika-icon notika-windows"></i>
+                                    </div>
+                                    <div class="breadcomb-ctn">
+                                        <h2>Danh sách sản phẩm</h2>
+                                        <p><span class="bread-ntd">Danh sách sản phẩm của bạn</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<!-- Breadcomb area End-->
+    <!-- Data Table area Start-->
+    <div class="data-table-area">
+        <div class="container">
+            <div class="container" style="margin: 10px 30%">
+                <a th:href="@{/admin}">
+                    <button type="button" class="btn notika-btn-blue"  style="color: #fff">Thêm tin tức</button>
+                </a>
+                <a th:href="@{/adminInfo}">
+                    <button type="button" class="btn notika-btn-amber" style="color: #fff">Xem tin tức</button>
+                </a>
+            </div>
+            <div class="container">
+                <a th:href="@{/addInfo}">
+                    <button type="button" class="btn btn-success">New Info</button>
+                </a>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="data-table-list">
+                        <div class="table-responsive">
+                            <table id="data-table-basic" class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Option</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="lists : ${info}">
+                                    <td><span th:text="${lists.id}"></span></td>
+                                    <td><span th:text="${lists.name}"></span></td>
+                                    <td>
+                                        <a th:href="@{/detail-info-{id}-nguyenthanhdat-sangodanang(id=${lists.id})}">
+                                            <button class="btn notika-btn-blue" style="color: #fff">Detail</button>
+                                        </a>
+                                        <a th:href="@{/editInfo-{id}(id=${lists.id})}">
+                                            <button class="btn notika-btn-amber" style="color: #fff">Edit</button>
+                                        </a>
+                                        <a th:href="@{/removeInfo-{id}(id=${lists.id})}">
+                                            <button class="btn notika-btn-red" style="color: #fff">Delete</button>
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <!-- Data Table area End-->
+    <!-- Start Footer area-->
+    <div class="footer-copyright-area" >
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="footer-copy-right">
+                        <p>Copyright © 2019 
+.  by <a href="https://colorlib.com">Thanh Duc</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Footer area-->
+    <!-- jquery
+		============================================ -->
+    <script src="owner/js/vendor/jquery-1.12.4.min.js"></script>
+    <!-- bootstrap JS
+		============================================ -->
+    <script src="owner/js/bootstrap.min.js"></script>
+    <!-- wow JS
+		============================================ -->
+    <script src="owner/js/wow.min.js"></script>
+    <!-- price-slider JS
+		============================================ -->
+    <script src="owner/js/jquery-price-slider.js"></script>
+    <!-- owl.carousel JS
+		============================================ -->
+    <script src="owner/js/owl.carousel.min.js"></script>
+    <!-- scrollUp JS
+		============================================ -->
+    <script src="owner/js/jquery.scrollUp.min.js"></script>
+    <!-- meanmenu JS
+		============================================ -->
+    <script src="owner/js/meanmenu/jquery.meanmenu.js"></script>
+    <!-- counterup JS
+		============================================ -->
+    <script src="owner/js/counterup/jquery.counterup.min.js"></script>
+    <script src="owner/js/counterup/waypoints.min.js"></script>
+    <script src="owner/js/counterup/counterup-active.js"></script>
+    <!-- mCustomScrollbar JS
+		============================================ -->
+    <script src="owner/js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- sparkline JS
+		============================================ -->
+    <script src="owner/js/sparkline/jquery.sparkline.min.js"></script>
+    <script src="owner/js/sparkline/sparkline-active.js"></script>
+    <!-- flot JS
+		============================================ -->
+    <script src="owner/js/flot/jquery.flot.js"></script>
+    <script src="owner/js/flot/jquery.flot.resize.js"></script>
+    <script src="owner/js/flot/flot-active.js"></script>
+    <!-- knob JS
+		============================================ -->
+    <script src="owner/js/knob/jquery.knob.js"></script>
+    <script src="owner/js/knob/jquery.appear.js"></script>
+    <script src="owner/js/knob/knob-active.js"></script>
+    <!--  Chat JS
+		============================================ -->
+    <script src="owner/js/chat/jquery.chat.js"></script>
+    <!--  todo JS
+		============================================ -->
+    <script src="owner/js/todo/jquery.todo.js"></script>
+	<!--  wave JS
+		============================================ -->
+    <script src="owner/js/wave/waves.min.js"></script>
+    <script src="owner/js/wave/wave-active.js"></script>
+    <!-- plugins JS
+		============================================ -->
+    <script src="owner/js/plugins.js"></script>
+    <!-- Data Table JS
+		============================================ -->
+    <script src="owner/js/data-table/jquery.dataTables.min.js"></script>
+    <!--<script src="owner/js/data-table/data-table-act.js"></script>-->
+    <!-- main JS
+		============================================ -->
+    <script src="owner/js/main.js"></script>
+    <script>
+        $(document).ready( function () {
+            $('#data-table-basic').DataTable();
+        } );
+    </script>
+</body>
+
+</html>
