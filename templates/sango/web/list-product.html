@@ -43,6 +43,20 @@
 
 <body class="category">
     <header id="header" style="background: #fff">
+        <div class="container" style="min-height:100% width:80%">
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                {% for message in messages %}
+                  <div class="alert alert-warning alert-dismissible" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    {{message}}
+                  </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+            
+            {% block body %}{% endblock %}
+        </div>
         <div class="container">
             <div class="row align-items-center justify-content-between d-flex">
                 <a>
@@ -117,24 +131,26 @@
                                 <h1><span>Danh sách sản phẩm</span></h1>
                             </div>
                             <div class="refine-search clearfix box">
-                                <div class="product-grid">
+                                <div class="product-grid">                                    
                                     <div class="row">
+                                        {% for d in data %}
                                         <div class="product-cols" style="width: 250px">
                                             <div class="product-block">
                                                 <div class="thumbnail-item">
-                                                    <a title="Nẹp Nhựa F Kết Thúc Sàn F8-09" href="{{ url_for('detail_product', id=1)}}">
-                                                        <img src="static/images/products/go-0.jpg" alt="Nẹp Nhựa F Kết Thúc Sàn F8-09" title="Nẹp Nhựa F Kết Thúc Sàn F8-09" class="img-responsive" style="height:201.781px; width:201.781px">
+                                                    <a title="Nẹp Nhựa F Kết Thúc Sàn F8-09" href="{{ url_for('detail_product', id=d.id)}}">
+                                                        <img src="{{ d.image }}" alt="{{ d.name }}" title="{{ d.name }}" class="img-responsive" style="height:201.781px; width:201.781px">
                                                     </a>
                                                 </div>
 
                                                 <div class="product-meta">
-                                                    <h4 class="name"><a title="Nẹp Nhựa F Kết Thúc Sàn F8-09" ></a></h4>
-                                                    <div class="price"><span class="price-new" ><span class="unit" style="color: #FF0000;">250.000đ/m</span></span>
+                                                    <h4 class="name"><a href="{{ url_for('detail_product', id=d.id)}}" title="{{ d.name }}">{{ d.name }}</a></h4>
+                                                    <div class="price"><span class="price-new" ><span class="unit" style="color: #FF0000;">{{ d.price }}đ/m2</span></span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                        {% endfor %}
+                                    </div>                                    
                                 </div>
                             </div>
                         </div>

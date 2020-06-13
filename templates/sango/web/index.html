@@ -103,26 +103,21 @@
                 </a>
                 <nav id="nav-menu-container">
                     <ul class="nav-menu">
-                        <li class="menu-has-children"><a href="{{ url_for('list_product', typep=1)}}">
+                        <li class="menu-has-children"><a href="{{ url_for('list_product', typep='san-go', origin=False)}}">
                             Sàn gỗ công nghiệp</a>
                             <ul>
-                                <li><a href="{{ url_for('list_product', typep=1)}}">Sàn gỗ Mỹ</a></li>
-                                <li><a href="{{ url_for('list_product', typep=1)}}">Sàn gỗ Thái Lan</a></li>
-                                <li><a href="{{ url_for('list_product', typep=1)}}">Sàn gỗ Đức</a></li>
-                                <li><a href="{{ url_for('list_product', typep=1)}}">Sàn gỗ Malaysia</a></li>
-                                <li><a href="{{ url_for('list_product', typep=1)}}">Sàn gỗ Trung Quốc</a></li>
-                                <li><a href="{{ url_for('list_product', typep=1)}}">Sàn gỗ Ấn Độ</a></li>
-                                <li><a href="{{ url_for('list_product', typep=1)}}">Sàn gỗ Việt Nam</a></li>
-                                <li><a href="{{ url_for('list_product', typep=1)}}">Sàn gỗ Lào</a></li>
+                                {% for key, value in list_origin.items() %}
+                                <li><a href="{{ url_for('list_product', typep='san-go', origin=key)}}">Sàn gỗ {{ value }}</a></li>
+                                {% endfor %}
                             </ul>
                         </li>
-                        <li><a href="{{ url_for('list_product', typep=1)}}">Sàn ngoài trời</a></li>
-                        <li><a href="{{ url_for('list_product', typep=1)}}">Conwood</a></li>
-                        <li class="menu-has-children"><a href="{{ url_for('list_product', typep=1)}}">
+                        <li><a href="{{ url_for('list_product', typep=1, origin=False)}}">Sàn ngoài trời</a></li>
+                        <li><a href="{{ url_for('list_product', typep=1, origin=False)}}">Conwood</a></li>
+                        <li class="menu-has-children"><a href="{{ url_for('list_product', typep=1, origin=False)}}">
                             Phụ kiện</a>
                             <ul>
-                                <li><a href="{{ url_for('list_product', typep=1)}}">Chân tường</a></li>
-                                <li><a href="{{ url_for('list_product', typep=1)}}">Nẹp</a></li>
+                                <li><a href="{{ url_for('list_product', typep=1, origin=False)}}">Chân tường</a></li>
+                                <li><a href="{{ url_for('list_product', typep=1, origin=False)}}">Nẹp</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -215,23 +210,25 @@
                             <div id="ajax-pagination">
                                 <div class="category-list">
                                     <div class="post">
+                                        {% for d in data %}
                                         <div class="row">
                                             <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 image">
-                                                <a href="{{ url_for('detail_info', id=1)}}">
-                                                    <img src="static/images/products/go-0.jpg" width="210" height="140">
+                                                <a href="{{ url_for('detail_info', id=d.id)}}">
+                                                    <img src="{{ d.image }}" width="210" height="140">
                                                 </a>
                                             </div>
                                             <div class="col-lg-9 col-md-9 col-sm-8 col-xs-8" style="margin-top: 35px;">
                                                 <div class="clearfix">
                                                     <h4 class="entry-title" style="text-align: left">
-                                                        <a style="color: #585858"> duc
+                                                        <a href="{{ url_for('detail_info', id=d.id)}}" style="color: #585858"> {{ d.name }}
                                                         </a>
                                                     </h4>
                                                 </div>
-                                                <p class="description" style="text-align: left;">{{ ducnt }}
+                                                <p class="description" style="text-align: left;">{{ d.short_info }}
                                                 </p>
                                             </div>
                                         </div>
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>

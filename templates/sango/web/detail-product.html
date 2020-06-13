@@ -139,8 +139,8 @@
                         <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12">
                                 <div class="product-images"><span class="product-label new-exist"><span class="product-label-new">new</span></span>
-                                    <a data-fancybox="gallery" title="Tấm ốp tường - ốp trần trong nhà CI121O">
-                                        <img src="https://i.ibb.co/HKk0bnh/Sure.jpg" alt="Tấm ốp tường - ốp trần trong nhà CI121O" class="img-responsive" style="width: 350px; height: 525px;" /> </a>
+                                    <a data-fancybox="gallery" title="{{ data.name }}">
+                                        <img src="{{ data.image }}" alt="{{ data.name }}" class="img-responsive" style="width: 350px; height: 525px;" /> </a>
                                 </div>
                             </div>
                             <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
@@ -148,10 +148,10 @@
                                     <div class="info-block">
                                         <ul>
                                             <li>
-                                                <h1 itemprop="name">SÀN GỖ CÔNG NGHIỆP SURE FLOOR (8mm)</h1>
+                                                <h1 itemprop="name">{{ data.name }}</h1>
                                             </li>
                                             <li class="price-big">
-                                                <div class="price"><span class="price-new">135.000 đ</span><span class="unit">/m2</span>
+                                                <div class="price"><span class="price-new">{{ data.price }} đ</span><span class="unit">/m2</span>
                                                 </div>
                                             </li>
                                             <li class="hidden-sm">
@@ -159,16 +159,15 @@
                                             </li>
                                             <li>
                                                 <ul class="list_attribute">
-                                                    <li>Bảo hành: <strong>10</strong> năm</li>
+                                                    <li>Bảo hành: <strong>{{ data.mainten if data.mainten else 'Chưa có thống tin' }}</strong> năm</li>
                                                     <li>Tình trạng: <strong>Còn hàng</strong></li>
                                                 </ul>
                                             </li>
-                                            <li class="hidden">
-                                                <label>Mã sản phẩm</label>: <span>CI121O</span></li>
-
-                                            <li class="hidden">
-                                                <label>Nhóm sản phẩm</label>: Tấm ốp tường - ốp trần trong nhà CI121O</li>
-
+                                            <li>
+                                                <ul class="list_attribute">
+                                                    <li>Thông tin mô tả: <strong>{{ data.short_info }}</strong></li>
+                                                </ul>
+                                            </li>
                                         </ul>
                                         <form action="/cart/add/" id="addtocart" method="post" accept-charset="utf-8">
 
@@ -218,27 +217,7 @@
                             <h3 itemprop="name"><span></span></h3>
                         </div>
                         <div class="entry-content">
-                            <p style="text-align: justify;"></p>
-                            <p style="text-align: justify;"><img src=""></p>
-                            <p style="text-align: justify;"></p><h1>
-	<span style="font-size:20px;"><span style="color: rgb(103, 103, 103); font-family: Roboto; text-align: justify;">&nbsp;Thông tin sản phẩm:</span></span></h1>
-<p>
-	<span style="color: rgb(103, 103, 103); font-family: Roboto; font-size: 16px; text-align: justify;">Sàn gỗ công nghiệp SURE FLOOR cấu tạo gồm 4 lớp:</span><br style="box-sizing: border-box; color: rgb(103, 103, 103); font-family: Roboto; font-size: 16px; text-align: justify;">
-	<span style="color: rgb(103, 103, 103); font-family: Roboto; font-size: 16px; text-align: justify;">Lõi là bột gỗ công nghiệp HDF (high density fiberboard) được ép ở áp suất cao (trên 850kg/cm3), lớp dưới cùng là lớp cân bằng và chống ẩm; lớp tạo trang trí bề mặt là melamine vân gỗ: Oak, Beech, Teak… lớp trên cùng là lớp sơn oxýt nhôm (Al2O3) chống trầy xướt; hèm khóa đôi double-click, cạnh U-groove dập và có phủ lớp parafin(sáp nến) chống ẩm.</span></p>
-<h1>
-	<span style="font-size: 20px;"><span style="color: rgb(103, 103, 103); font-family: Roboto; text-align: justify;">&nbsp;Ưu điểm:</span></span></h1>
-<p>
-	<span style="color: rgb(103, 103, 103); font-family: Roboto; font-size: 16px; text-align: justify;">Lắp đặt trên sàn bê tông, nền gạch cũ… không dùng khung xương, đinh và có thể di chuyển lắp lại nơi khác dẽ dàng.</span></p>
-<p>
-	&nbsp;</p>
-<h1>
-	<span style="font-size: 20px;"><span style="color: rgb(103, 103, 103); font-family: Roboto; text-align: justify;">Hình ảnh mẫu thực tế</span></span></h1>
-<p>
-	&nbsp;</p>
-<div>
-	<img alt="" src="https://i.ibb.co/Rg9jCFM/Sure-1708.jpg" style="width: 373px; height: 500px;"><img alt="" src="https://i.ibb.co/zQvN2wb/Sure-9284.jpg" style="width: 400px; height: 500px;"><img alt="" src="https://i.ibb.co/KyrbkGQ/Sure-7008.jpg" style="width: 330px; height: 500px;"><img alt="" src="https://i.ibb.co/3f8BBZ5/Sure-4662.jpg" style="width: 356px; height: 500px;"><img alt="" src="https://i.ibb.co/jkB5VRb/Sure-4608.jpg" style="width: 400px; height: 500px;"><img alt="" src="https://i.ibb.co/zXDrK4f/Sure-2964.jpg" style="width: 336px; height: 500px;"><img alt="" src="https://i.ibb.co/pyQHhyc/Sure-2962.jpg" style="width: 305px; height: 500px;"><img alt="" src="https://i.ibb.co/LSZKXSC/Sure-2209.jpg" style="width: 295px; height: 500px;"></div>
-<p></p>
-
+                            {{ data.long_info|safe }}
                         </div>
                     </div>
                 </div>
