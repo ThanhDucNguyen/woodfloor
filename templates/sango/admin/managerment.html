@@ -175,9 +175,12 @@
                                             <button class="btn notika-btn-amber" style="color: #fff">Edit</button>
                                         </a>
                                         <a>
-                                            <button class="btn notika-btn-red" onclick="deleteProduct('{{ d.name }}')" style="color: #fff">Delete</button>
+                                          <button id="navigate" class="btn notika-btn-red" onclick="deleteProduct('{{ d.name }}')" style="color: #fff">Delete</button>
                                         </a>
-                                        <button onclick="deleteProduct()">Try it</button>
+                                        <form method="POST" role="form" action="{{url_for('delete_product')}}" style="display: none;">
+                                          <input type="hidden" value="{{ data.id }}" name="id">
+                                          <button type="submit" id="submit" class="btn notika-btn-red" style="color: #fff">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                                 {% endfor %}
@@ -274,9 +277,8 @@
         });
         function deleteProduct(name) {
               var confirm = prompt("Bạn có chắc là muốn xóa sản phẩm này không?", name);
-              alert(confirm)
-              if (confirm != null || confirm != "") {
-                alert('ok');
+              if (confirm == name) {
+                document.getElementById("submit").click();
               }
             };
     </script>

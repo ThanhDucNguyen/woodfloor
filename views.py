@@ -128,5 +128,15 @@ class web():
          flash('Hệ thống lỗi, nhờ báo cáo sự cố với bộ phận kỹ thuật.')
       return redirect("/admin")
 
+   @app.route('/delete-product', methods=['POST'])
+   def delete_product():
+      try:
+         id = request.form.get("id")
+         session.query(models.Product).filter(models.Product.id == int(id)).delete()
+         flash('Xóa sản phẩm thành công!')
+      except Exception as e:
+         flash('Hệ thống lỗi, nhờ báo cáo sự cố với bộ phận kỹ thuật.')
+      return redirect("/admin")
+
 if __name__ == '__main__':
    app.run(debug = True)
