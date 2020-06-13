@@ -59,7 +59,7 @@
         </div>
         <div class="container">
             <div class="row align-items-center justify-content-between d-flex">
-                <a>
+                <a href="{{ url_for('index')}}">
                     <div id="logo" style="margin: 0px; font-size: 30px;
                     background: linear-gradient(to right, #FF0000 0%, #00FF00 100%);
                     -webkit-background-clip: text;
@@ -70,26 +70,21 @@
                 </a>
                 <nav id="nav-menu-container">
                     <ul class="nav-menu">
-                        <li class="menu-has-children"><a>
+                        <li class="menu-has-children"><a href="{{ url_for('list_product', typep='san-go', origin=False)}}">
                             Sàn gỗ công nghiệp</a>
                             <ul>
-                                <li><a>Sàn gỗ Mỹ</a></li>
-                                <li><a>Sàn gỗ Thái Lan</a></li>
-                                <li><a>Sàn gỗ Đức</a></li>
-                                <li><a>Sàn gỗ Malaysia</a></li>
-                                <li><a>Sàn gỗ Trung Quốc</a></li>
-                                <li><a>Sàn gỗ Ấn Độ</a></li>
-                                <li><a>Sàn gỗ Việt Nam</a></li>
-                                <li><a>Sàn gỗ Lào</a></li>
+                                {% for key, value in list_origin.items() %}
+                                <li><a href="{{ url_for('list_product', typep='san-go', origin=key)}}">Sàn gỗ {{ value }}</a></li>
+                                {% endfor %}
                             </ul>
                         </li>
-                        <li><a>Sàn ngoài trời</a></li>
-                        <li><a>Conwood</a></li>
-                        <li class="menu-has-children"><a>
+                        <li><a href="{{ url_for('list_product', typep='sunny', origin=False)}}">Sàn ngoài trời</a></li>
+                        <li><a href="{{ url_for('list_product', typep='conwood', origin=False)}}">Conwood</a></li>
+                        <li class="menu-has-children"><a href="{{ url_for('list_product', typep='nep-chantuong', origin=False)}}">
                             Phụ kiện</a>
                             <ul>
-                                <li><a>Chân tường</a></li>
-                                <li><a>Nẹp</a></li>
+                                <li><a href="{{ url_for('list_product', typep='chan-tuong', origin=False)}}">Chân tường</a></li>
+                                <li><a href="{{ url_for('list_product', typep='nep', origin=False)}}">Nẹp</a></li>
                             </ul>
                         </li>
                     </ul>

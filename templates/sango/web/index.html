@@ -111,13 +111,13 @@
                                 {% endfor %}
                             </ul>
                         </li>
-                        <li><a href="{{ url_for('list_product', typep=1, origin=False)}}">Sàn ngoài trời</a></li>
-                        <li><a href="{{ url_for('list_product', typep=1, origin=False)}}">Conwood</a></li>
-                        <li class="menu-has-children"><a href="{{ url_for('list_product', typep=1, origin=False)}}">
+                        <li><a href="{{ url_for('list_product', typep='sunny', origin=False)}}">Sàn ngoài trời</a></li>
+                        <li><a href="{{ url_for('list_product', typep='conwood', origin=False)}}">Conwood</a></li>
+                        <li class="menu-has-children"><a href="{{ url_for('list_product', typep='nep-chantuong', origin=False)}}">
                             Phụ kiện</a>
                             <ul>
-                                <li><a href="{{ url_for('list_product', typep=1, origin=False)}}">Chân tường</a></li>
-                                <li><a href="{{ url_for('list_product', typep=1, origin=False)}}">Nẹp</a></li>
+                                <li><a href="{{ url_for('list_product', typep='chan-tuong', origin=False)}}">Chân tường</a></li>
+                                <li><a href="{{ url_for('list_product', typep='nep', origin=False)}}">Nẹp</a></li>
                             </ul>
                         </li>
                     </ul>

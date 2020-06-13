@@ -72,17 +72,3 @@ class Product(db.Model):
     wood_type = db.Column(db.String(455))
     short_info = db.Column(db.String(500))  
     long_info = db.Column(db.String(1500))
-    image_description = db.Column(db.String(455))
-
-    def __init__(self, type, price, name, color, origin, mainten, image, wood_type, short_info, long_info, image_description):
-        self.type = type
-        self.name = name
-        self.price = price
-        self.color = color
-        self.origin = origin
-        self.mainten = mainten
-        self.image = image
-        self.wood_type = wood_type
-        self.short_info = short_info
-        self.long_info = long_info
-        self.image_description = image_description
