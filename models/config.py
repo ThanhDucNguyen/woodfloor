@@ -53,12 +53,6 @@ class Info(db.Model):
     long_info = db.Column(db.String(1500))
     image = db.Column(db.String(500))
 
-    def __init__(self, name, short_info, long_info, image):
-        self.name = name
-        self.short_info = short_info
-        self.long_info = long_info
-        self.image = image
-
 class Product(db.Model):
     __tablename__ = 'product'
     id = db.Column(db.Integer, primary_key=True)

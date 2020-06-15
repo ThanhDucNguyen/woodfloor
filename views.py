@@ -39,6 +39,12 @@ class web():
       return render_template('sango/web/detail-product.html', data=data, list_origin=list_origin)
    
    ##################################################################################################
+   # Login =======================
+   @app.route('/login')
+   def login():
+      return render_template('sango/admin/login.html')
+
+   # Product ===
    @app.route('/admin')
    def admin():
       data = session.query(models.Product).all()
@@ -137,6 +143,79 @@ class web():
       except Exception as e:
          flash('Hệ thống lỗi, nhờ báo cáo sự cố với bộ phận kỹ thuật.')
       return redirect("/admin")
+   
+   # INFO ====================================
+   @app.route('/list-info')
+   def info():
+      data = session.query(models.Info).all()
+      return render_template('sango/admin/list-info.html', data=data)
+
+   @app.route('/admin-add-info')
+   def add_info():
+      return render_template('sango/admin/add-info.html')
+
+   @app.route('/add-info', methods=['POST'])
+   def admin_add_info():
+      try:
+         name = request.form.get("name")
+         image = request.form.get("image")
+         short_info = request.form.get("short_info")
+         long_info = request.form.get("long_info")
+
+         info = models.Info()
+         info.name = name
+         info.image = image
+         info.short_info = short_info
+         info.long_info = long_info
+         session.add(info)
+         session.commit()
+         session.close()
+         flash('Tạo tin tức thành công!')
+      except Exception as e:
+         flash('Hệ thống lỗi, nhờ báo cáo sự cố với bộ phận kỹ thuật.')
+      return redirect("/list-info")
+
+   @app.route('/admin-detail-info-<id>')
+   def ad_detail_info(id):
+      data = session.query(models.Info).filter(models.Info.id == id).first()
+      return render_template('sango/admin/detail-info.html', data=data)
+
+   @app.route('/admin-edit-info-<id>')
+   def edit_info(id):
+      data = session.query(models.Info).filter(models.Info.id == id).first()
+      return render_template('sango/admin/edit-info.html', data=data)
+
+   @app.route('/edit-info', methods=['POST'])
+   def ad_edit_info():
+      try:
+         id = request.form.get("id")
+         name = request.form.get("name")
+         image = request.form.get("image")
+         short_info = request.form.get("short_info")
+         long_info = request.form.get("long_info")
+
+         info = session.query(models.Info).filter(models.Info.id == int(id)).first()
+         info.name = name
+         info.image = image
+         info.short_info = short_info
+         info.long_info = long_info
+         session.add(info)
+         session.commit()
+         session.close()
+         flash('Chỉnh sửa tin tức thành công!')
+      except Exception as e:
+         flash('Hệ thống lỗi, nhờ báo cáo sự cố với bộ phận kỹ thuật.')
+      return redirect("/list-info")
+
+   @app.route('/delete-info', methods=['POST'])
+   def delete_info():
+      try:
+         id = request.form.get("id")
+         session.query(models.Info).filter(models.Info.id == int(id)).delete()
+         flash('Xóa tin tức thành công!')
+      except Exception as e:
+         flash('Hệ thống lỗi, nhờ báo cáo sự cố với bộ phận kỹ thuật.')
+      return redirect("/list-info")
 
 if __name__ == '__main__':
    app.run(debug = True)

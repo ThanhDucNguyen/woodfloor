@@ -9,75 +9,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
 		============================================ -->
-    <link rel="shortcut icon" type="image/x-icon" href="owner/img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="static/owner/img/favicon.ico">
     <!-- Google Fonts
 		============================================ -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
     <!-- Bootstrap CSS
 		============================================ -->
-    <link rel="stylesheet" href="owner/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/owner/css/bootstrap.min.css">
     <!-- font awesome CSS
 		============================================ -->
-    <link rel="stylesheet" href="owner/css/font-awesome.min.css">
+    <link rel="stylesheet" href="static/owner/css/font-awesome.min.css">
     <!-- owl.carousel CSS
 		============================================ -->
-    <link rel="stylesheet" href="owner/css/owl.carousel.css">
-    <link rel="stylesheet" href="owner/css/owl.theme.css">
-    <link rel="stylesheet" href="owner/css/owl.transitions.css">
+    <link rel="stylesheet" href="static/owner/css/owl.carousel.css">
+    <link rel="stylesheet" href="static/owner/css/owl.theme.css">
+    <link rel="stylesheet" href="static/owner/css/owl.transitions.css">
     <!-- meanmenu CSS
 		============================================ -->
-    <link rel="stylesheet" href="owner/css/meanmenu/meanmenu.min.css">
+    <link rel="stylesheet" href="static/owner/css/meanmenu/meanmenu.min.css">
     <!-- animate CSS
 		============================================ -->
-    <link rel="stylesheet" href="owner/css/animate.css">
+    <link rel="stylesheet" href="static/owner/css/animate.css">
     <!-- summernote CSS
 		============================================ -->
-    <link rel="stylesheet" href="owner/css/summernote/summernote.css">
+    <link rel="stylesheet" href="static/owner/css/summernote/summernote.css">
     <!-- Range Slider CSS
 		============================================ -->
-    <link rel="stylesheet" href="owner/css/themesaller-forms.css">
+    <link rel="stylesheet" href="static/owner/css/themesaller-forms.css">
     <!-- normalize CSS
 		============================================ -->
-    <link rel="stylesheet" href="owner/css/normalize.css">
+    <link rel="stylesheet" href="static/owner/css/normalize.css">
     <!-- mCustomScrollbar CSS
 		============================================ -->
-    <link rel="stylesheet" href="owner/css/scrollbar/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="static/owner/css/scrollbar/jquery.mCustomScrollbar.min.css">
     <!-- Notika icon CSS
 		============================================ -->
-    <link rel="stylesheet" href="owner/css/notika-custom-icon.css">
+    <link rel="stylesheet" href="static/owner/css/notika-custom-icon.css">
     <!-- bootstrap select CSS
 		============================================ -->
-    <link rel="stylesheet" href="owner/css/bootstrap-select/bootstrap-select.css">
+    <link rel="stylesheet" href="static/owner/css/bootstrap-select/bootstrap-select.css">
     <!-- datapicker CSS
 		============================================ -->
-    <link rel="stylesheet" href="owner/css/datapicker/datepicker3.css">
+    <link rel="stylesheet" href="static/owner/css/datapicker/datepicker3.css">
     <!-- Color Picker CSS
 		============================================ -->
-    <link rel="stylesheet" href="owner/css/color-picker/farbtastic.css">
+    <link rel="stylesheet" href="static/owner/css/color-picker/farbtastic.css">
     <!-- main CSS
 		============================================ -->
-    <link rel="stylesheet" href="owner/css/chosen/chosen.css">
+    <link rel="stylesheet" href="static/owner/css/chosen/chosen.css">
     <!-- notification CSS
 		============================================ -->
-    <link rel="stylesheet" href="owner/css/notification/notification.css">
+    <link rel="stylesheet" href="static/owner/css/notification/notification.css">
     <!-- dropzone CSS
 		============================================ -->
-    <link rel="stylesheet" href="owner/css/dropzone/dropzone.css">
+    <link rel="stylesheet" href="static/owner/css/dropzone/dropzone.css">
     <!-- wave CSS
 		============================================ -->
-    <link rel="stylesheet" href="owner/css/wave/waves.min.css">
+    <link rel="stylesheet" href="static/owner/css/wave/waves.min.css">
     <!-- main CSS
 		============================================ -->
-    <link rel="stylesheet" href="owner/css/main.css">
+    <link rel="stylesheet" href="static/owner/css/main.css">
     <!-- style CSS
 		============================================ -->
-    <link rel="stylesheet" href="owner/css/style.css">
+    <link rel="stylesheet" href="static/owner/css/style.css">
     <!-- responsive CSS
 		============================================ -->
-    <link rel="stylesheet" href="owner/css/responsive.css">
+    <link rel="stylesheet" href="static/owner/css/responsive.css">
     <!-- modernizr JS
 		============================================ -->
-    <script src="owner/js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="static/owner/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
 <body>
@@ -88,7 +88,7 @@
                     <div class="logo-area">
                         <div  style="width: 100%">
                             <a href="/admin">
-                                <h2 style="width: 50%; float: left; color: white; font-weight: bold;" >WitBus</h2>
+                                <h2 style="width: 50%; float: left; color: white; font-weight: bold;" >Trang chủ</h2>
                             </a>
                             <a href="#" style="float: right;color: white"> Logout</a>
                         </div>
@@ -117,7 +117,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
-                                    <a href="listBusOwner.html"><button style="float: right;padding-top: 10px;" class="btn btn-danger danger-icon-notika waves-effect"><i class="notika-icon notika-left-arrow"></i></button></a>
+                                    <a href="{{ url_for('info')}}"><button style="float: right;padding-top: 10px;" class="btn btn-danger danger-icon-notika waves-effect">Back</button></a>
                                 </div>
                             </div>
                         </div>
@@ -132,41 +132,26 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="form-element-list mg-t-30">
-                            <form method="POST" role="form" th:action="@{/addInfoProcess}" th:object="${info}">
+                            <form>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="margin-bottom: 20px;">
                                     <div class="form-group nk-datapk-ctm form-elet-mg" >
-                                        <label>Tên tin tức</label>
-                                        <div class="input-group date nk-int-st">
-                                            <input type="text" class="form-control" th:field="*{name}">
+                                        <label>Tên sản phẩm</label>
+                                        <div class="input-group date nk-int-st">{{ data.name }}
                                         </div>
-
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="margin-bottom: 20px;">
                                     <div class="form-group nk-datapk-ctm form-elet-mg" >
                                         <label>Hình ảnh</label>
                                         <div class="input-group date nk-int-st">
-                                            <input type="text" class="form-control" th:field="*{image}">
+                                            <img src="{{ data.image }}">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 20px;">
-                                    <div class="form-group nk-datapk-ctm form-elet-mg" >
-                                        <label>Thông tin ngắn</label>
-                                        <div class="input-group date nk-int-st">
-                                            <textarea class="form-control" th:field="*{shortInfo}"></textarea>
-                                        </div>
-                                    </div>
+                                <div class="entry-content">
+                                    <p style="text-align: justify;">{{ data.short_info }}</p>
+                                    <p style="text-align: justify;">{{ data.long_info|safe }}</p>
                                 </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 20px;">
-                                    <div class="form-group nk-datapk-ctm form-elet-mg" >
-                                        <label>Thông tin</label>
-                                        <div class="input-group date nk-int-st">
-                                            <textarea class="form-control" cols="310" id="editorl" name="editorl" rows="10" th:field="*{long_info}"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button type="submit" id="duc" class="btn btn-success" data-dismiss="modal">Thêm</button>
                             </form>
                         </div>
                     </div>
@@ -187,107 +172,105 @@
         </div>
     </div>
     <!-- End Footer area-->
-    <script src="js/ckeditor/ckeditor.js"></script>
-    <script src="js/ckfinder/ckfinder.js"></script>
     <!-- jquery
 		============================================ -->
-    <script src="owner/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="static/owner/js/vendor/jquery-1.12.4.min.js"></script>
     <!-- bootstrap JS
 		============================================ -->
-    <script src="owner/js/bootstrap.min.js"></script>
+    <script src="static/owner/js/bootstrap.min.js"></script>
     <!-- wow JS
 		============================================ -->
-    <script src="owner/js/wow.min.js"></script>
+    <script src="static/owner/js/wow.min.js"></script>
     <!-- price-slider JS
 		============================================ -->
-    <script src="owner/js/jquery-price-slider.js"></script>
+    <script src="static/owner/js/jquery-price-slider.js"></script>
     <!-- owl.carousel JS
 		============================================ -->
-    <script src="owner/js/owl.carousel.min.js"></script>
+    <script src="static/owner/js/owl.carousel.min.js"></script>
     <!-- scrollUp JS
 		============================================ -->
-    <script src="owner/js/jquery.scrollUp.min.js"></script>
+    <script src="static/owner/js/jquery.scrollUp.min.js"></script>
     <!-- meanmenu JS
 		============================================ -->
-    <script src="owner/js/meanmenu/jquery.meanmenu.js"></script>
+    <script src="static/owner/js/meanmenu/jquery.meanmenu.js"></script>
     <!-- counterup JS
 		============================================ -->
-    <script src="owner/js/counterup/jquery.counterup.min.js"></script>
-    <script src="owner/js/counterup/waypoints.min.js"></script>
-    <script src="owner/js/counterup/counterup-active.js"></script>
+    <script src="static/owner/js/counterup/jquery.counterup.min.js"></script>
+    <script src="static/owner/js/counterup/waypoints.min.js"></script>
+    <script src="static/owner/js/counterup/counterup-active.js"></script>
     <!-- mCustomScrollbar JS
 		============================================ -->
-    <script src="owner/js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="static/owner/js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
     <!-- sparkline JS
 		============================================ -->
-    <script src="owner/js/sparkline/jquery.sparkline.min.js"></script>
-    <script src="owner/js/sparkline/sparkline-active.js"></script>
+    <script src="static/owner/js/sparkline/jquery.sparkline.min.js"></script>
+    <script src="static/owner/js/sparkline/sparkline-active.js"></script>
     <!-- flot JS
 		============================================ -->
-    <script src="owner/js/flot/jquery.flot.js"></script>
-    <script src="owner/js/flot/jquery.flot.resize.js"></script>
-    <script src="owner/js/flot/flot-active.js"></script>
+    <script src="static/owner/js/flot/jquery.flot.js"></script>
+    <script src="static/owner/js/flot/jquery.flot.resize.js"></script>
+    <script src="static/owner/js/flot/flot-active.js"></script>
     <!-- knob JS
 		============================================ -->
-    <script src="owner/js/knob/jquery.knob.js"></script>
-    <script src="owner/js/knob/jquery.appear.js"></script>
-    <script src="owner/js/knob/knob-active.js"></script>
+    <script src="static/owner/js/knob/jquery.knob.js"></script>
+    <script src="static/owner/js/knob/jquery.appear.js"></script>
+    <script src="static/owner/js/knob/knob-active.js"></script>
     <!-- Input Mask JS
 		============================================ -->
-    <script src="owner/js/jasny-bootstrap.min.js"></script>
+    <script src="static/owner/js/jasny-bootstrap.min.js"></script>
     <!-- icheck JS
 		============================================ -->
-    <script src="owner/js/icheck/icheck.min.js"></script>
-    <script src="owner/js/icheck/icheck-active.js"></script>
+    <script src="static/owner/js/icheck/icheck.min.js"></script>
+    <script src="static/owner/js/icheck/icheck-active.js"></script>
     <!-- rangle-slider JS
 		============================================ -->
-    <script src="owner/js/rangle-slider/jquery-ui-1.10.4.custom.min.js"></script>
-    <script src="owner/js/rangle-slider/jquery-ui-touch-punch.min.js"></script>
-    <script src="owner/js/rangle-slider/rangle-active.js"></script>
+    <script src="static/owner/js/rangle-slider/jquery-ui-1.10.4.custom.min.js"></script>
+    <script src="static/owner/js/rangle-slider/jquery-ui-touch-punch.min.js"></script>
+    <script src="static/owner/js/rangle-slider/rangle-active.js"></script>
     <!-- datapicker JS
 		============================================ -->
-    <script src="owner/js/datapicker/bootstrap-datepicker.js"></script>
-    <script src="owner/js/datapicker/datepicker-active.js"></script>
+    <script src="static/owner/js/datapicker/bootstrap-datepicker.js"></script>
+    <script src="static/owner/js/datapicker/datepicker-active.js"></script>
     <!-- bootstrap select JS
 		============================================ -->
-    <script src="owner/js/bootstrap-select/bootstrap-select.js"></script>
+    <script src="static/owner/js/bootstrap-select/bootstrap-select.js"></script>
     <!--  color-picker JS
 		============================================ -->
-    <script src="owner/js/color-picker/farbtastic.min.js"></script>
-    <script src="owner/js/color-picker/color-picker.js"></script>
+    <script src="static/owner/js/color-picker/farbtastic.min.js"></script>
+    <script src="static/owner/js/color-picker/color-picker.js"></script>
     <!--  notification JS
 		============================================ -->
-    <script src="owner/js/notification/bootstrap-growl.min.js"></script>
-    <script src="owner/js/notification/notification-active.js"></script>
+    <script src="static/owner/js/notification/bootstrap-growl.min.js"></script>
+    <script src="static/owner/js/notification/notification-active.js"></script>
     <!--  summernote JS
 		============================================ -->
-    <script src="owner/js/summernote/summernote-updated.min.js"></script>
-    <script src="owner/js/summernote/summernote-active.js"></script>
+    <script src="static/owner/js/summernote/summernote-updated.min.js"></script>
+    <script src="static/owner/js/summernote/summernote-active.js"></script>
     <!-- dropzone JS
 		============================================ -->
-    <script src="owner/js/dropzone/dropzone.js"></script>
+    <script src="static/owner/js/dropzone/dropzone.js"></script>
     <!--  wave JS
 		============================================ -->
-    <script src="owner/js/wave/waves.min.js"></script>
-    <script src="owner/js/wave/wave-active.js"></script>
+    <script src="static/owner/js/wave/waves.min.js"></script>
+    <script src="static/owner/js/wave/wave-active.js"></script>
     <!--  chosen JS
 		============================================ -->
-    <script src="owner/js/chosen/chosen.jquery.js"></script>
+    <script src="static/owner/js/chosen/chosen.jquery.js"></script>
     <!--  Chat JS
 		============================================ -->
-    <script src="owner/js/chat/jquery.chat.js"></script>
+    <script src="static/owner/js/chat/jquery.chat.js"></script>
     <!--  todo JS
 		============================================ -->
-    <script src="owner/js/todo/jquery.todo.js"></script>
+    <script src="static/owner/js/todo/jquery.todo.js"></script>
     <!-- plugins JS
 		============================================ -->
-    <script src="owner/js/plugins.js"></script>
+    <script src="static/owner/js/plugins.js"></script>
     <!-- main JS
 		============================================ -->
-    <script src="owner/js/main.js"></script>
+    <script src="static/owner/js/main.js"></script>
 	<!-- tawk chat JS
 		============================================ -->
-    <script src="owner/js/tawk-chat.js"></script>
+    <script src="static/owner/js/tawk-chat.js"></script>
     <script>
         $(document).ready(function() {
             $("#imageFile").change(function(){
@@ -301,16 +284,6 @@
                 $("input[name=image]").val(file_path);
             });
         });
-    </script>
-    <script>
-        CKEDITOR.replace( 'editorl', {
-            toolbarLocation: 'top',
-            width:750,
-            height:500,
-            // Remove some plugins that would conflict with the bottom
-            // toolbar position.
-            removePlugins: 'elementspath,resize'
-        } );
     </script>
 </body>
 
