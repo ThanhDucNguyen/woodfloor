@@ -4,9 +4,16 @@ from sqlalchemy import *
 from models.config import session
 from flask import Flask, flash, redirect, render_template, \
      request, url_for, redirect
+import os
+from werkzeug.utils import secure_filename
+
+PATH_DEFAULT = 'D:/30. Work/31. TODO/PYTHON_SANGO/sango/'
+UPLOAD_FOLDER = 'static/img_info/'
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+app.config['UPLOAD_FOLDER'] = PATH_DEFAULT + UPLOAD_FOLDER
 
 class web():
    @app.route('/')
@@ -43,6 +50,12 @@ class web():
    @app.route('/login')
    def login():
       return render_template('sango/admin/login.html')
+
+   # Todo
+   # Chức năng login
+   # Logout
+   # Import file image
+   # Paging 
 
    # Product ===
    @app.route('/admin')
@@ -156,23 +169,33 @@ class web():
 
    @app.route('/add-info', methods=['POST'])
    def admin_add_info():
-      try:
-         name = request.form.get("name")
-         image = request.form.get("image")
-         short_info = request.form.get("short_info")
-         long_info = request.form.get("long_info")
+      # try:
+      name = request.form.get("name")
+      short_info = request.form.get("short_info")
+      long_info = request.form.get("long_info")
 
-         info = models.Info()
-         info.name = name
-         info.image = image
-         info.short_info = short_info
-         info.long_info = long_info
-         session.add(info)
-         session.commit()
-         session.close()
-         flash('Tạo tin tức thành công!')
-      except Exception as e:
-         flash('Hệ thống lỗi, nhờ báo cáo sự cố với bộ phận kỹ thuật.')
+      if 'image' not in request.files:
+         flash('No file part')
+         return redirect("/admin-add-info")
+      image = request.files['image']
+      # if user does not select file, browser also
+      # submit an empty part without filename
+      if image.filename == '':
+         flash('No selected file')
+         return redirect("/admin-add-info")
+      file_name = common.upload_file(image)
+
+      info = models.Info()
+      info.name = name
+      info.image = file_name
+      info.short_info = short_info
+      info.long_info = long_info
+      session.add(info)
+      session.commit()
+      session.close()
+      flash('Tạo tin tức thành công!')
+      # except Exception as e:
+      #    flash('Hệ thống lỗi, nhờ báo cáo sự cố với bộ phận kỹ thuật.')
       return redirect("/list-info")
 
    @app.route('/admin-detail-info-<id>')
