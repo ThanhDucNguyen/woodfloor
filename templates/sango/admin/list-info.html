@@ -158,23 +158,23 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {% for d in data %}
+                                {% for d in range(0, data|length) %}
                                   <tr>
-                                    <td>{{ d.id }}</td>
-                                    <td>{{ d.name }}</td>
+                                    <td>{{ d + 1 }}</td>
+                                    <td>{{ data[d].name }}</td>
                                     <td>
-                                        <a href="{{ url_for('ad_detail_info', id=d.id)}}">
+                                        <a href="{{ url_for('ad_detail_info', id=data[d].id)}}">
                                             <button class="btn notika-btn-blue" style="color: #fff">Detail</button>
                                         </a>
-                                        <a href="{{ url_for('edit_info', id=d.id)}}">
+                                        <a href="{{ url_for('edit_info', id=data[d].id)}}">
                                             <button class="btn notika-btn-amber" style="color: #fff">Edit</button>
                                         </a>
                                         <a>
-                                          <button id="navigate" class="btn notika-btn-red" onclick="deleteInfo('{{ d.name }}', '{{ d.id }}')" style="color: #fff">Delete</button>
+                                          <button id="navigate" class="btn notika-btn-red" onclick="deleteInfo('{{ data[d].name }}', '{{ data[d].id }}')" style="color: #fff">Delete</button>
                                         </a>
                                         <form method="POST" role="form" action="{{url_for('delete_info')}}" style="display: none;">
-                                          <input type="hidden" value="{{ d.id }}" name="id">
-                                          <button type="submit" id="submit-{{ d.id }}" class="btn notika-btn-red" style="color: #fff">Delete</button>
+                                          <input type="hidden" value="{{ data[d].id }}" name="id">
+                                          <button type="submit" id="submit-{{ data[d].id }}" class="btn notika-btn-red" style="color: #fff">Delete</button>
                                         </form>
                                     </td>
                                   </tr>

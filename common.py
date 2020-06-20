@@ -22,15 +22,12 @@ LIST_ORIGIN = {
     "Lao": "Lào"
 }
 
-def upload_file(image):
-    # if user does not select file, browser also
-    # submit an empty part without filename
-    if image.filename == '':
-        flash('No selected file')
-        return redirect("/admin-add-info")
+def upload_file(image, file_old=None):
     file_name = UPLOAD_FOLDER + image.filename[0:len(image.filename)]
     filename = image.filename[2:len(image.filename)]
     filename = '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    if file_old:
+        os.remove(os.path.join(PATH_DEFAULT, file_old))
     if image and filename:
         filename = secure_filename(image.filename)
         image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))

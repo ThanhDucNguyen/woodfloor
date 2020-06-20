@@ -210,21 +210,21 @@
                             <div id="ajax-pagination">
                                 <div class="category-list">
                                     <div class="post">
-                                        {% for d in data %}
+                                        {% for d in range(0, page_size) %}
                                         <div class="row">
                                             <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 image">
-                                                <a href="{{ url_for('detail_info', id=d.id)}}">
-                                                    <img src="{{ d.image }}" width="210" height="140">
+                                                <a href="{{ url_for('detail_info', id=data[d].id)}}">
+                                                    <img src="{{ data[d].image }}" width="210" height="140">
                                                 </a>
                                             </div>
                                             <div class="col-lg-9 col-md-9 col-sm-8 col-xs-8" style="margin-top: 35px;">
                                                 <div class="clearfix">
                                                     <h4 class="entry-title" style="text-align: left">
-                                                        <a href="{{ url_for('detail_info', id=d.id)}}" style="color: #585858"> {{ d.name }}
+                                                        <a href="{{ url_for('detail_info', id=data[d].id)}}" style="color: #585858"> {{ data[d].name }}
                                                         </a>
                                                     </h4>
                                                 </div>
-                                                <p class="description" style="text-align: left;">{{ d.short_info }}
+                                                <p class="description" style="text-align: left;">{{ data[d].short_info }}
                                                 </p>
                                             </div>
                                         </div>
@@ -234,6 +234,15 @@
                             </div>
                         </div>
                     </div>
+                    {% if check_view %}
+                    <a href="{{ url_for('index', page_size=page_size + 10)}}" >
+                        <button hre style="margin-left: 50%;" type="button" class="btn-outline-primary">Xem thêm</button>
+                    </a>
+                    {% else %}
+                    <a href="{{ url_for('index', page_size=10)}}" >
+                        <button hre style="margin-left: 50%;" type="button" class="btn-outline-primary">Thu gọn</button>
+                    </a>
+                    {% endif %}
                     <div class="home-banners clearfix">
                         <div class="row">
                             <div class="col-sm-6">

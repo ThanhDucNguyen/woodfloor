@@ -128,18 +128,18 @@
                             <div class="refine-search clearfix box">
                                 <div class="product-grid">                                    
                                     <div class="row">
-                                        {% for d in data %}
+                                        {% for d in range(0, page_size) %}
                                         <div class="product-cols" style="width: 250px">
                                             <div class="product-block">
                                                 <div class="thumbnail-item">
-                                                    <a title="Nẹp Nhựa F Kết Thúc Sàn F8-09" href="{{ url_for('detail_product', id=d.id)}}">
-                                                        <img src="{{ d.image }}" alt="{{ d.name }}" title="{{ d.name }}" class="img-responsive" style="height:201.781px; width:201.781px">
+                                                    <a title="Nẹp Nhựa F Kết Thúc Sàn F8-09" href="{{ url_for('detail_product', id=data[d].id)}}">
+                                                        <img src="{{ data[d].image }}" alt="{{ data[d].name }}" title="{{ data[d].name }}" class="img-responsive" style="height:201.781px; width:201.781px">
                                                     </a>
                                                 </div>
 
                                                 <div class="product-meta">
-                                                    <h4 class="name"><a href="{{ url_for('detail_product', id=d.id)}}" title="{{ d.name }}">{{ d.name }}</a></h4>
-                                                    <div class="price"><span class="price-new" ><span class="unit" style="color: #FF0000;">{{ d.price }}đ/m2</span></span>
+                                                    <h4 class="name"><a href="{{ url_for('detail_product', id=data[d].id)}}" title="{{ data[d].name }}">{{ data[d].name }}</a></h4>
+                                                    <div class="price"><span class="price-new" ><span class="unit" style="color: #FF0000;">{{ data[d].price }}đ/m2</span></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -151,6 +151,15 @@
                         </div>
                     </div>
                 </div>
+                {% if check_view %}
+                <a href="{{ url_for('list_product', typep='san-go', origin=origin, page_size=page_size + 10)}}">
+                    <button hre style="margin-left: 50%;" type="button" class="btn-outline-primary">Xem thêm</button>
+                </a>
+                {% else %}
+                <a href="{{ url_for('list_product', typep='san-go', origin=origin, page_size=page_size + 10)}}">
+                    <button hre style="margin-left: 50%;" type="button" class="btn-outline-primary">Thu gọn</button>
+                </a>
+                {% endif %}
                 <div id="loader" class="hidden">
                     <div id="loadersmall"></div>
                 </div>
