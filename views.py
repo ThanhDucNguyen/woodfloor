@@ -1,19 +1,26 @@
+import json
 import models.config as models
 import common
 from sqlalchemy import *
 from models.config import session
 from flask import Flask, flash, redirect, render_template, \
      request, url_for, redirect
+from flask_login import LoginManager, login_required, logout_user, current_user, login_user
 import os
 from werkzeug.utils import secure_filename
+# from flask.ext.login import LoginManager, login_required, logout_user, current_user, login_user
+
 
 PATH_DEFAULT = 'D:/30. Work/31. TODO/PYTHON_SANGO/sango/'
 UPLOAD_FOLDER = 'static/img_info/'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 app = Flask(__name__)
+login_manager = LoginManager()
+login_manager.init_app(app)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 app.config['UPLOAD_FOLDER'] = PATH_DEFAULT + UPLOAD_FOLDER
+login_manager.login_view = 'login'
 
 class web():
    @app.route('/')
@@ -62,23 +69,54 @@ class web():
    
    ##################################################################################################
    # Login =======================
+   @login_manager.user_loader
+   def load_user(user_id):
+      return session.query(models.User).filter(
+         models.User.id == user_id).first()
+
    @app.route('/login')
    def login():
       return render_template('sango/admin/login.html')
 
+   @app.route('/login', methods=['POST'])
+   def login_process():
+      try:
+         username = request.form.get("user_name")
+         password = request.form.get("password")
+         user = session.query(models.User).filter(
+            models.User.username == username,
+            models.User.password == password).first()
+         if user:
+            login_user(user)
+         else:
+            flash('Mật khẩu không chính xác')
+            return redirect("/login")
+      except Exception as e:
+         flash('Hệ thống lỗi, nhờ báo cáo sự cố với bộ phận kỹ thuật.')
+         return redirect("/login")
+      return redirect("/admin")
+
+   @app.route("/logout")
+   def logout():
+      logout_user()
+      return redirect('/login')
+
    # Product ===
    @app.route('/admin')
+   @login_required 
    def admin():
       data = session.query(models.Product).order_by(models.Product.id.desc()).all()
       return render_template('sango/admin/managerment.html', data=data)
 
    @app.route('/admin-add-product')
+   @login_required
    def admin_add_product():
       list_origin = common.LIST_ORIGIN
       data = session.query(models.Product).all()
       return render_template('sango/admin/add-product.html', data=data, list_origin=list_origin)
 
    @app.route('/add-product', methods=['POST'])
+   @login_required
    def add_product():
       try:
          type = request.form.get("type")
@@ -123,17 +161,20 @@ class web():
       return redirect("/admin")
 
    @app.route('/admin-detail-product-<id>')
+   @login_required
    def admin_detail_product(id):
       data = session.query(models.Product).filter(models.Product.id == id).first()
       return render_template('sango/admin/detail-product.html', data=data)
 
    @app.route('/admin-edit-product-<id>')
+   @login_required
    def admin_edit_product(id):
       list_origin = common.LIST_ORIGIN
       data = session.query(models.Product).filter(models.Product.id == id).first()
       return render_template('sango/admin/edit-product.html', data=data, list_origin=list_origin)
 
    @app.route('/edit-product', methods=['POST'])
+   @login_required
    def edit_product():
       try:
          id = request.form.get("id")
@@ -173,6 +214,7 @@ class web():
       return redirect("/admin")
 
    @app.route('/delete-product', methods=['POST'])
+   @login_required
    def delete_product():
       try:
          id = request.form.get("id")
@@ -184,15 +226,18 @@ class web():
    
    # INFO ====================================
    @app.route('/list-info')
+   @login_required
    def info():
       data = session.query(models.Info).order_by(models.Info.id.desc()).all()
       return render_template('sango/admin/list-info.html', data=data)
 
    @app.route('/admin-add-info')
+   @login_required
    def add_info():
       return render_template('sango/admin/add-info.html')
 
    @app.route('/add-info', methods=['POST'])
+   @login_required
    def admin_add_info():
       try:
          name = request.form.get("name")
@@ -224,16 +269,19 @@ class web():
       return redirect("/list-info")
 
    @app.route('/admin-detail-info-<id>')
+   @login_required
    def ad_detail_info(id):
       data = session.query(models.Info).filter(models.Info.id == id).first()
       return render_template('sango/admin/detail-info.html', data=data)
 
    @app.route('/admin-edit-info-<id>')
+   @login_required
    def edit_info(id):
       data = session.query(models.Info).filter(models.Info.id == id).first()
       return render_template('sango/admin/edit-info.html', data=data)
 
    @app.route('/edit-info', methods=['POST'])
+   @login_required
    def ad_edit_info():
       try:
          id = request.form.get("id")
@@ -265,6 +313,7 @@ class web():
       return redirect("/list-info")
 
    @app.route('/delete-info', methods=['POST'])
+   @login_required
    def delete_info():
       try:
          id = request.form.get("id")
@@ -273,10 +322,6 @@ class web():
       except Exception as e:
          flash('Hệ thống lỗi, nhờ báo cáo sự cố với bộ phận kỹ thuật.')
       return redirect("/list-info")
-
-   # Todo
-   # Chức năng login
-   # Logout
 
 if __name__ == '__main__':
    app.run(debug = True)

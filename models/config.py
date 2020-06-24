@@ -66,3 +66,20 @@ class Product(db.Model):
     wood_type = db.Column(db.String(455))
     short_info = db.Column(db.String(500))  
     long_info = db.Column(db.String(1500))
+
+class User(db.Model):
+    __tablename__ = 'user'
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(45))
+    password = db.Column(db.String(45))
+    def is_authenticated(self):
+        return True
+
+    def is_active(self):   
+        return True           
+
+    def is_anonymous(self):
+        return False          
+
+    def get_id(self):         
+        return str(self.id)
