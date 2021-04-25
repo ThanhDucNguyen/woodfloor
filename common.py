@@ -3,7 +3,7 @@ from flask import Flask, flash, redirect, render_template, \
 import os
 from werkzeug.utils import secure_filename
 
-PATH_DEFAULT = 'D:/30. Work/31. TODO/PYTHON_SANGO/sango/'
+PATH_DEFAULT = 'C:/Users/OS/Desktop/Data/0.Work/woodfloor/'
 UPLOAD_FOLDER = 'static/img_upload/'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 

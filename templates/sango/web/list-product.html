@@ -3,6 +3,32 @@
 
 <head>
     <title>Hệ thống phân phối Sàn Gỗ Cao Cấp, Sàn Nhựa Chính Hãng</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Floordi" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="description" content="Tấm ốp tường - ốp trần trong  nhà Skywood; Sử dụng công nghệ bề mặt Homogenous - giúp cấu trúc sản phẩm chắc chắn, và độ bền màu kéo dài; Bảo hành 10 năm." />
+    <!-- SEO Customize by Le Anh Dan 0936 669 339 -->
+    <meta name="abstract" content="Công ty phân phối sàn gỗ tự nhiên và sàn gỗ công nghiệp nhập khẩu cao cấp" />
+    <meta name="copyright" content="Copyright 2019 by Floordi" />
+    <meta name="robots" content="index,follow,noodp" />
+    <meta name="Googlebot" content="index,follow" />
+    <!-- SEO Customize by Le Anh Dan End New -->
+    <link href="static/favicon.png" rel="shortcut icon" />
+    <link rel="canonical" href="static/tam-op-tuong-op-tran-trong-nha-ci121o/" />
+    <link href="static/images/apple-touch-icon.png" rel="apple-touch-icon" />
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700&amp;subset=vietnamese" rel="stylesheet">
+    <meta name="google-site-verification" content="W_nXoey8cbCAT8GyGZlA-zismVsU0hd_IV9cbk_IIZQ" />
+    <meta property="fb:app_id" content="274491509760868" />
+    <!-- SEO Customize by Le Anh Dan -->
+    <meta property="og:locale" content="vi_VN" />
+    <meta property="og:type" content="product" />
+    <meta property="og:title" content="Tấm ốp tường - ốp trần trong nhà CI121O" />
+    <meta property="og:description" content="Tấm ốp tường - ốp trần trong  nhà Skywood; Sử dụng công nghệ bề mặt Homogenous - giúp cấu trúc sản phẩm chắc chắn, và độ bền màu kéo dài; Bảo hành 10 năm." />
+    <meta property="og:image" content="/images/products/medium/Ceiling_Panel_CI101O-2.png" />
+    <meta property="og:url" content="/tam-op-tuong-op-tran-trong-nha-ci121o/" />
+    <meta property="og:site_name" content="FLOORDI.com - Hệ thống phân phối Sàn Gỗ Cao Cấp, Sàn Nhựa Chính Hãng" />
+    <meta name="twitter:card" content="summary" />
     <!-- END SEO Customize by Le Anh Dan -->
 
     <link href="static/public/frontend/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
@@ -10,7 +36,15 @@
     <script type="text/javascript" src="static/public/frontend/js/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="static/engine1/style.css" />
     <script type="text/javascript" src="static/engine1/jquery.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="static/Theme/css/btr-menu.css" rel="stylesheet" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <link href="static/Theme/starter-template.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
     <!--
             CSS
             ============================================= -->
@@ -22,6 +56,10 @@
     <link rel="stylesheet" href="static/css/animate.min.css">
     <link rel="stylesheet" href="static/css/owl.carousel.css">
     <link rel="stylesheet" href="static/css/main.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
     <style type="text/css">
         :root .carbonad,
         :root #carbonads-container,
@@ -38,25 +76,14 @@
         .nav-menu ul li a:hover {
             color: #f42f2c;
         }
+        .menu-has-children {
+            margin-top: 15px;
+        }
     </style>
 </head>
 
 <body class="category">
     <header id="header" style="background: #fff">
-        <div class="container" style="min-height:100% width:80%">
-            {% with messages = get_flashed_messages() %}
-              {% if messages %}
-                {% for message in messages %}
-                  <div class="alert alert-warning alert-dismissible" role="alert">
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                    {{message}}
-                  </div>
-                {% endfor %}
-              {% endif %}
-            {% endwith %}
-            
-            {% block body %}{% endblock %}
-        </div>
         <div class="container">
             <div class="row align-items-center justify-content-between d-flex">
                 <a href="{{ url_for('index')}}">
@@ -78,14 +105,27 @@
                                 {% endfor %}
                             </ul>
                         </li>
-                        <li><a href="{{ url_for('list_product', typep='sunny', origin=False)}}">Sàn ngoài trời</a></li>
-                        <li><a href="{{ url_for('list_product', typep='conwood', origin=False)}}">Conwood</a></li>
+                        <li style="margin-top: 15px;"><a href="{{ url_for('list_product', typep='sunny', origin=False)}}">Sàn ngoài trời</a></li>
+                        <li style="margin-top: 15px;"><a href="{{ url_for('list_product', typep='conwood', origin=False)}}">Conwood</a></li>
                         <li class="menu-has-children"><a href="{{ url_for('list_product', typep='nep-chantuong', origin=False)}}">
                             Phụ kiện</a>
                             <ul>
                                 <li><a href="{{ url_for('list_product', typep='chan-tuong', origin=False)}}">Chân tường</a></li>
                                 <li><a href="{{ url_for('list_product', typep='nep', origin=False)}}">Nẹp</a></li>
                             </ul>
+                        </li>
+                        <li style="padding: 0;">
+                            <form method="POST" role="form" action="{{url_for('change_location')}}" enctype=multipart/form-data>
+                                <div class="form-group" style="margin-bottom: 5px;">
+                                    <select class="selectpicker" id="location" name="location" data-live-search="true" style="float: left; padding: 10px;">
+                                        <option value="all" {{ 'selected' if location == 'all' else '' }}>Chọn khu vực của bạn</option>
+                                        <option value="danang" {{ 'selected' if location == 'danang' else '' }}>Đà Nẵng</option>
+                                        <option value="quangngai" {{ 'selected' if location == 'quangngai' else '' }}>Quảng Ngãi</option>
+                                        <option value="quangnam" {{ 'selected' if location == 'quangnam' else '' }}>Quảng Nam</option>
+                                    </select>
+                                    <button type="submit" style="display: none;" id="btn-change" class="btn btn-outline-success" style="margin-left: 3px;">Tìm kiếm</button>
+                                </div>
+                            </form>
                         </li>
                     </ul>
                 </nav>
@@ -129,7 +169,7 @@
                                 <div class="product-grid">                                    
                                     <div class="row">
                                         {% for d in range(0, page_size) %}
-                                        <div class="product-cols" style="width: 250px">
+                                        <div class="product-cols" style="width: 225px">
                                             <div class="product-block">
                                                 <div class="thumbnail-item">
                                                     <a title="Nẹp Nhựa F Kết Thúc Sàn F8-09" href="{{ url_for('detail_product', id=data[d].id)}}">
@@ -139,7 +179,7 @@
 
                                                 <div class="product-meta">
                                                     <h4 class="name"><a href="{{ url_for('detail_product', id=data[d].id)}}" title="{{ data[d].name }}">{{ data[d].name }}</a></h4>
-                                                    <div class="price"><span class="price-new" ><span class="unit" style="color: #FF0000;">{{ data[d].price }}đ/m2</span></span>
+                                                    <div class="price"><span class="price-new" ><span class="unit" style="color: #FF0000;">{{ data[d].price[location] }}đ/m2</span></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -151,14 +191,16 @@
                         </div>
                     </div>
                 </div>
-                {% if check_view %}
-                <a href="{{ url_for('list_product', typep='san-go', origin=origin, page_size=page_size + 10)}}">
-                    <button hre style="margin-left: 50%;" type="button" class="btn-outline-primary">Xem thêm</button>
-                </a>
-                {% else %}
-                <a href="{{ url_for('list_product', typep='san-go', origin=origin, page_size=page_size + 10)}}">
-                    <button hre style="margin-left: 50%;" type="button" class="btn-outline-primary">Thu gọn</button>
-                </a>
+                {% if data|length > 10 %}
+                    {% if check_view %}
+                    <a href="{{ url_for('list_product', typep='san-go', origin=origin, page_size=page_size + 10)}}">
+                        <button hre style="margin-left: 50%;" type="button" class="btn-outline-primary">Xem thêm</button>
+                    </a>
+                    {% else %}
+                    <a href="{{ url_for('list_product', typep='san-go', origin=origin, page_size=page_size + 10)}}">
+                        <button hre style="margin-left: 50%;" type="button" class="btn-outline-primary">Thu gọn</button>
+                    </a>
+                    {% endif %}
                 {% endif %}
                 <div id="loader" class="hidden">
                     <div id="loadersmall"></div>
@@ -197,6 +239,9 @@
     <script>
         $(document).ready(function() {
             $("#navbar").btrmenu();
+        });
+        $("#location").change(function() {
+            $("#btn-change").click();
         });
     </script>
     <script src="static/js/vendor/jquery-2.2.4.min.js"></script>

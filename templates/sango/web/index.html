@@ -55,6 +55,10 @@
     <link rel="stylesheet" href="static/css/owl.carousel.css">
     <link rel="stylesheet" href="static/css/main.css">
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
     <style type="text/css">
         :root .carbonad,
         :root #carbonads-container,
@@ -70,6 +74,21 @@
         
         .nav-menu ul li a:hover {
             color: #f42f2c;
+        }
+        .menu-has-children {
+            margin-top: 15px;
+        }
+        .modal-dialog {
+            max-width: 100%;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .modal-content {
+            height: auto;
+            border-radius: 0;
         }
     </style>
 </head>
@@ -111,14 +130,27 @@
                                 {% endfor %}
                             </ul>
                         </li>
-                        <li><a href="{{ url_for('list_product', typep='sunny', origin=False)}}">Sàn ngoài trời</a></li>
-                        <li><a href="{{ url_for('list_product', typep='conwood', origin=False)}}">Conwood</a></li>
+                        <li style="margin-top: 15px;"><a href="{{ url_for('list_product', typep='sunny', origin=False)}}">Sàn ngoài trời</a></li>
+                        <li style="margin-top: 15px;"><a href="{{ url_for('list_product', typep='conwood', origin=False)}}">Conwood</a></li>
                         <li class="menu-has-children"><a href="{{ url_for('list_product', typep='nep-chantuong', origin=False)}}">
                             Phụ kiện</a>
                             <ul>
                                 <li><a href="{{ url_for('list_product', typep='chan-tuong', origin=False)}}">Chân tường</a></li>
                                 <li><a href="{{ url_for('list_product', typep='nep', origin=False)}}">Nẹp</a></li>
                             </ul>
+                        </li>
+                        <li style="padding: 0;">
+                            <form method="POST" role="form" action="{{url_for('change_location')}}" enctype=multipart/form-data>
+                                <div class="form-group" style="margin-bottom: 5px;">
+                                    <select class="selectpicker" id="location" name="location" data-live-search="true" style="float: left; padding: 10px;">
+                                        <option value="all" {{ 'selected' if location == 'all' else '' }}>Chọn khu vực của bạn</option>
+                                        <option value="danang" {{ 'selected' if location == 'danang' else '' }}>Đà Nẵng</option>
+                                        <option value="quangngai" {{ 'selected' if location == 'quangngai' else '' }}>Quảng Ngãi</option>
+                                        <option value="quangnam" {{ 'selected' if location == 'quangnam' else '' }}>Quảng Nam</option>
+                                    </select>
+                                    <button type="submit" style="display: none;" id="btn-change" class="btn btn-outline-success" style="margin-left: 3px;">Tìm kiếm</button>
+                                </div>
+                            </form>
                         </li>
                     </ul>
                 </nav>
@@ -128,15 +160,84 @@
     </header>
     <!-- #header -->
 
+    <div class="container">
+    {% if loca %}  
+    <!-- Modal -->
+        <div class="modal fade in show" id="" role="dialog" style="display: block; padding: 10% 15%;">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <form method="POST" role="form" action="{{url_for('change_location')}}" enctype=multipart/form-data>
+                        <div class="modal-header">
+                            <button type="button" class="close" id="close" data-dismiss="modal" style="padding-top: 0; margin-right: 0;">&times;</button>
+                            <h4 class="modal-title">Chọn khu vực của bạn</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="services" class="hidden-xs clearfix">
+                                <div>
+                                    <div class="service-list service-1 hidden-sm style-1" onclick="myFunction('danang')" style="width: 33.3%">
+                                        <div class="service-content"><span class="icon-image" style="background-color: #298A08;"> </span>
+                                            <div class="content">
+                                                <div class="service-title">Đà Nẵng</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="service-list service-1 hidden-sm style-1" onclick="myFunction('quangngai')" style="width: 33.3%">
+                                        <div class="service-content"><span class="icon-image"> </span>
+                                            <div class="content">
+                                                <div class="service-title">Quảng Ngãi</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="service-list service-1 hidden-sm style-1" onclick="myFunction('quangnam')" style="width: 33.3%">
+                                        <div class="service-content"><span class="icon-image" style="background-color: #DF0174;"> </span>
+                                            <div class="content">
+                                                <div class="service-title">Quảng Nam</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div>
+                                    <div class="service-list service-1 hidden-sm style-1" onclick="myFunction('hue')">
+                                        <div class="service-content"><span class="icon-image" style="background-color: #AEB404;"> </span>
+                                            <div class="content">
+                                                <div class="service-title">Huế</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="service-list service-1 hidden-sm style-1" onclick="myFunction('kontum')">
+                                        <div class="service-content"><span class="icon-image" style="background-color: #3104B4;"> </span>
+                                            <div class="content">
+                                                <div class="service-title">KonTum</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="service-list service-1 hidden-sm style-1" onclick="myFunction('gialai')">
+                                        <div class="service-content"><span class="icon-image" style="background-color: #04B4AE;"> </span>
+                                            <div class="content">
+                                                <div class="service-title">Gia Lai</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                            <input type="hidden" id="input-location" name="location" value="all">
+                        </div>
+                        <button type="submit" id="btn-submit" class="btn btn-default" style="display: none;">Tìm kiếm</button>                    
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    </div> 
+
     <!-- start banner Area -->
     <section class="banner-area relative" id="home" style="margin-top: 15px; height: 700px">
         <div class="container">
             <div class="row fullscreen d-flex align-items-center justify-content-start">
                 <div class="banner-content col-lg-8 col-md-12">
                     <h4 class="text-white text-uppercase"></h4>
-                    <h1>
-								SÀN GỖ CAO CẤP				
-							</h1>
+                    <h1>SÀN GỖ CAO CẤP</h1>
                     <p class="text-white">
                         Sàn gỗ cao cấp, được nhập khẩu từ Đức, Thái, Malaysia... Hãy để chúng tôi đem những điều tuyệt vời nhất đến cho gia đình bạn.
                     </p>
@@ -325,7 +426,25 @@
     <script>
         $(document).ready(function() {
             $("#navbar").btrmenu();
+            $("#modal").show();
+            $("#close").click(function() {
+                alert("edit");
+            });
+
+            
         });
+        $("#close, #close-btn").click(function() {
+            myFunction('all');
+        });
+        function myFunction(lo) {
+            $("#input-location").val(lo);
+            $("#btn-submit").click();
+            $(".modal-dialog").css("display", "none");
+        }
+        $("#location").change(function() {
+            $("#btn-change").click();
+        });
+
     </script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
     <script>

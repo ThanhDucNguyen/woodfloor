@@ -58,7 +58,7 @@ class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     type = db.Column(db.String(100))
     name = db.Column(db.String(255))
-    price = db.Column(db.String(30))
+    price = db.Column(db.String(250))
     color = db.Column(db.String(45))
     origin = db.Column(db.String(255))
     mainten = db.Column(db.Integer)

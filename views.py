@@ -11,7 +11,7 @@ from werkzeug.utils import secure_filename
 # from flask.ext.login import LoginManager, login_required, logout_user, current_user, login_user
 
 
-PATH_DEFAULT = 'D:/30. Work/31. TODO/PYTHON_SANGO/sango/'
+PATH_DEFAULT = 'C:/Users/OS/Desktop/Data/0.Work/woodfloor/'
 UPLOAD_FOLDER = 'static/img_info/'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
@@ -20,9 +20,18 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 app.config['UPLOAD_FOLDER'] = PATH_DEFAULT + UPLOAD_FOLDER
+app.config['LOCATION'] = 'all'
+app.config['LOCA'] = True
 login_manager.login_view = 'login'
 
 class web():
+   @app.route('/change_location', methods=['POST'])
+   def change_location():
+      location = request.form.get("location")
+      app.config['LOCATION'] = location
+      app.config['LOCA'] = False
+      return redirect("/")
+
    @app.route('/')
    def index():
       page_size = request.args.get("page_size")
@@ -32,40 +41,58 @@ class web():
       count = len(data)
       page_size = page_size if page_size < len(data) else len(data)
       check_view = True if page_size < len(data) else False
+      session.close()
       return render_template('sango/web/index.html',
          data=data, list_origin=list_origin,
-         page_size=page_size, check_view=check_view)
+         page_size=page_size, check_view=check_view, location=app.config['LOCATION'], loca=app.config['LOCA'])
 
    @app.route('/detail-info-<id>')
    def detail_info(id):
       list_origin = common.LIST_ORIGIN
       data = session.query(models.Info).filter(models.Info.id == id).first()
-      return render_template('sango/web/detail-info.html', data=data, list_origin=list_origin)
+      session.close()
+      return render_template('sango/web/detail-info.html', data=data, list_origin=list_origin, location=app.config['LOCATION'])
 
    @app.route('/list-product-filter-<typep>-<origin>')
    def list_product(typep, origin=None):
-      list_origin = common.LIST_ORIGIN
-      page_size = request.args.get("page_size")
-      page_size = int(page_size) if page_size else 12
-      if origin != 'False':
-         data = session.query(models.Product).filter(models.Product.type == typep, models.Product.origin == origin).order_by(models.Product.id).all()
-      elif typep == 'nep-chantuong':
-         data = session.query(models.Product).filter(or_(models.Product.type == 'nep', models.Product.type == 'chan-tuong')).order_by(models.Product.id).all()
-      else:
-         data = session.query(models.Product).filter(models.Product.type == typep).order_by(models.Product.id).all()
-      count = len(data)
-      flash(count)
-      page_size = page_size if page_size < len(data) else len(data)
-      check_view = True if page_size < len(data) else False
-      return render_template('sango/web/list-product.html', data=data, list_origin=list_origin,
-         page_size=page_size, check_view=check_view,
-         typep=typep, origin=origin)
+      try:
+         list_origin = common.LIST_ORIGIN
+         page_size = request.args.get("page_size")
+         page_size = int(page_size) if page_size else 12
+         if origin != 'False':
+            data = session.query(models.Product).filter(models.Product.type == typep, models.Product.origin == origin).order_by(models.Product.id).all()
+         elif typep == 'nep-chantuong':
+            data = session.query(models.Product).filter(or_(models.Product.type == 'nep', models.Product.type == 'chan-tuong')).order_by(models.Product.id).all()
+         else:
+            data = session.query(models.Product).filter(models.Product.type == typep).order_by(models.Product.id).all()
+         count = len(data)
+         page_size = page_size if page_size < len(data) else len(data)
+         check_view = True if page_size < len(data) else False
+         session.close()
+         for d in data:
+            d.price = json.loads(d.price)
+         return render_template('sango/web/list-product.html', data=data, list_origin=list_origin,
+            page_size=page_size, check_view=check_view,
+            typep=typep, origin=origin, location=app.config['LOCATION'])
+      except:
+         session.rollback()
+         raise
+      finally:
+         session.close()
 
    @app.route('/detail-product-<id>')
    def detail_product(id):
-      list_origin = common.LIST_ORIGIN
-      data = session.query(models.Product).filter(models.Product.id == id).first()
-      return render_template('sango/web/detail-product.html', data=data, list_origin=list_origin)
+      try:
+         list_origin = common.LIST_ORIGIN
+         data = session.query(models.Product).filter(models.Product.id == id).first()
+         data.price = json.loads(data.price)
+         session.close()
+         return render_template('sango/web/detail-product.html', data=data, list_origin=list_origin, location=app.config['LOCATION'])
+      except:
+         session.rollback()
+         raise
+      finally:
+         session.close()
    
    ##################################################################################################
    # Login =======================
@@ -86,6 +113,7 @@ class web():
          user = session.query(models.User).filter(
             models.User.username == username,
             models.User.password == password).first()
+         session.close()
          if user:
             login_user(user)
          else:
@@ -106,6 +134,7 @@ class web():
    @login_required 
    def admin():
       data = session.query(models.Product).order_by(models.Product.id.desc()).all()
+      session.close()
       return render_template('sango/admin/managerment.html', data=data)
 
    @app.route('/admin-add-product')
@@ -113,6 +142,7 @@ class web():
    def admin_add_product():
       list_origin = common.LIST_ORIGIN
       data = session.query(models.Product).all()
+      session.close()
       return render_template('sango/admin/add-product.html', data=data, list_origin=list_origin)
 
    @app.route('/add-product', methods=['POST'])
@@ -121,7 +151,10 @@ class web():
       try:
          type = request.form.get("type")
          name = request.form.get("name")
-         price = request.form.get("price")
+         price_all = request.form.get("price_all")
+         price_dn = request.form.get("price_dn")
+         price_qn = request.form.get("price_qn")
+         price_qng = request.form.get("price_qng")
          color = request.form.get("color")
          origin = request.form.get("origin")
          mainten = request.form.get("mainten")
@@ -130,7 +163,6 @@ class web():
          long_info = request.form.get("long_info")
 
          if 'image' not in request.files:
-            flash(request.files)
             flash('No file part')
             return redirect("/admin")
          image = request.files['image']
@@ -140,6 +172,8 @@ class web():
             flash('No selected file')
             return redirect("/admin-add-info")
          file_name = common.upload_file(image)
+
+         price = json.dumps({ "all": price_all, "danang": price_dn, "quangnam": price_qn, "quangngai": price_qng })
 
          product = models.Product()
          product.type = type
@@ -156,9 +190,13 @@ class web():
          session.commit()
          session.close()
          flash('Tạo sản phẩm thành công!')
+         return redirect("/admin")
       except Exception as e:
          flash('Hệ thống lỗi, nhờ báo cáo sự cố với bộ phận kỹ thuật.')
-      return redirect("/admin")
+         session.rollback()
+      finally:
+         session.close()
+         return redirect("/admin")
 
    @app.route('/admin-detail-product-<id>')
    @login_required
@@ -297,7 +335,6 @@ class web():
             image = request.files['image']
             if image.filename != '':
                file_old = info.image
-               flash(file_old)
                file_name = common.upload_file(image, file_old)
                
          info.name = name

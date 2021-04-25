@@ -76,6 +76,10 @@
         .nav-menu ul li a:hover {
             color: #f42f2c;
         }
+
+        .menu-has-children {
+            margin-top: 15px;
+        }
     </style>
 </head>
 
@@ -103,14 +107,27 @@
                                 {% endfor %}
                             </ul>
                         </li>
-                        <li><a href="{{ url_for('list_product', typep='sunny', origin=False)}}">Sàn ngoài trời</a></li>
-                        <li><a href="{{ url_for('list_product', typep='conwood', origin=False)}}">Conwood</a></li>
+                        <li style="margin-top: 15px;"><a href="{{ url_for('list_product', typep='sunny', origin=False)}}">Sàn ngoài trời</a></li>
+                        <li style="margin-top: 15px;"><a href="{{ url_for('list_product', typep='conwood', origin=False)}}">Conwood</a></li>
                         <li class="menu-has-children"><a href="{{ url_for('list_product', typep='nep-chantuong', origin=False)}}">
                             Phụ kiện</a>
                             <ul>
                                 <li><a href="{{ url_for('list_product', typep='chan-tuong', origin=False)}}">Chân tường</a></li>
                                 <li><a href="{{ url_for('list_product', typep='nep', origin=False)}}">Nẹp</a></li>
                             </ul>
+                        </li>
+                        <li style="padding: 0;">
+                            <form method="POST" role="form" action="{{url_for('change_location')}}" enctype=multipart/form-data>
+                                <div class="form-group" style="margin-bottom: 5px;">
+                                    <select class="selectpicker" id="location" name="location" data-live-search="true" style="float: left; padding: 10px;">
+                                        <option value="all" {{ 'selected' if location == 'all' else '' }}>Chọn khu vực của bạn</option>
+                                        <option value="danang" {{ 'selected' if location == 'danang' else '' }}>Đà Nẵng</option>
+                                        <option value="quangngai" {{ 'selected' if location == 'quangngai' else '' }}>Quảng Ngãi</option>
+                                        <option value="quangnam" {{ 'selected' if location == 'quangnam' else '' }}>Quảng Nam</option>
+                                    </select>
+                                    <button type="submit" style="display: none;" id="btn-change" class="btn btn-outline-success" style="margin-left: 3px;">Tìm kiếm</button>
+                                </div>
+                            </form>
                         </li>
                     </ul>
                 </nav>
@@ -185,6 +202,9 @@
                     $(this).addClass("collapsed");
                 }
             });
+        });
+        $("#location").change(function() {
+            $("#btn-change").click();
         });
     </script>
     <script src="static/js/vendor/jquery-2.2.4.min.js"></script>
